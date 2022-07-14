@@ -1,0 +1,35 @@
+CREATE TABLE products (
+                          id SERIAL PRIMARY KEY,
+                          product_name VARCHAR(30) NOT NULL,
+                          company VARCHAR(20) NOT NULL,
+                          product_count INT DEFAULT 0,
+                          price NUMERIC NOT NULL,
+                          is_discounted BOOL
+);
+
+INSERT INTO products (product_name, company, product_count, price, is_discounted)
+VALUES
+    ('iPhone X', 'Apple', 3, 76000, false),
+    ('iPhone 8', 'Apple', 2, 71000, true),
+    ('iPhone 7', 'Apple', 5, 42000, true),
+    ('Galaxy S9', 'Samsung', 2, 46000, false),
+    ('Galaxy S8 Plus', 'Samsung', 1, 56000, true),
+    ('Desire 12', 'HTC', 5, 28000, true),
+    ('Nokia 9', 'HMD Global', 6, 38000, true);
+
+SELECT * FROM products where company not in ('HTC');
+SELECT * FROM products where company in ('Apple') and price<75000;
+SELECT * FROM products where price >= 46000;
+SELECT * FROM products ORDER BY price DESC LIMIT 2;
+SELECT product_name,price FROM products ORDER BY price LIMIT 1;
+SELECT * FROM products where is_discounted = true;
+SELECT * FROM products where is_discounted = false;
+SELECT * FROM products ORDER BY price DESC ;
+SELECT sum(price) as summa_of_product FROM products;
+SELECT company, count(*) as models_count
+FROM products
+GROUP BY company
+HAVING count(*) <=2;
+
+
+
